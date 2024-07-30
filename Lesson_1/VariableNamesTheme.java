@@ -12,16 +12,16 @@ public class VariableNamesTheme {
         System.out.println("Произведение цифр = " + multiDigits);
         // Максимальное число
         int maxNumber = 99;
-        System.out.println("Ьфксимальное число = " + maxNumber);
+        System.out.println("Максимальное число = " + maxNumber);
         // Колличество десятков
         int numberOfTens = 6;
         System.out.println("Колличество десятков = " + numberOfTens);
         // Вес собаки
         float dogWeight = 9.4f;
         System.out.println("Вес собаки = " + dogWeight);
-        // Исходное число
+        // сходное число
         int originalNumber = 10;
-        System.out.println("Исходное число" + originalNumber);
+        System.out.println("сходное число = " + originalNumber);
         // Процент по вкладу
         int interestOnDeposit = 16;
         System.out.println("Процент по вкладу = " + interestOnDeposit);
@@ -105,9 +105,9 @@ public class VariableNamesTheme {
         // Электронная почта действительная?
         boolean isEmailValid = true;
         System.out.println("Электронная почта действительная? " + isEmailValid);
-        // Имеются уникальные строки?
+        // меются уникальные строки?
         boolean isUniqueStrings = true;
-        System.out.println("Имеются уникальные строки? " + isUniqueStrings);
+        System.out.println("меются уникальные строки? " + isUniqueStrings);
 
         System.out.println("3. Аббревиатуры");
         // Старый universally unique identifier
