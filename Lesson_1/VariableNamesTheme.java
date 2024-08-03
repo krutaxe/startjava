@@ -18,9 +18,9 @@ public class VariableNamesTheme {
         int maxNumber = 99;
         System.out.println("Максимальное число = " + maxNumber);
 
-        // Колличество десятков
+        // Количество десятков
         int numberOfTens = 6;
-        System.out.println("Колличество десятков = " + numberOfTens);
+        System.out.println("Количество десятков = " + numberOfTens);
 
         // Вес собаки
         float dogWeight = 9.4f;
@@ -62,9 +62,9 @@ public class VariableNamesTheme {
         int gameScore = 5;
         System.out.println("Счет в игре = " + gameScore);
 
-        // Пунтк меню
+        // Пункт меню
         int menuItem = 3;
-        System.out.println("Пунтк меню = " + menuItem);
+        System.out.println("Пункт меню = " + menuItem);
 
         // Стоимость кофе
         double coffeeCost = 15.45;
@@ -74,7 +74,7 @@ public class VariableNamesTheme {
         int startDate = 11;
         System.out.println("Дата начала = " + startDate);
 
-        // Oкончание диапазона
+        // Окончание диапазона
         int endOfRange = 90;
         System.out.println("Окончание диапазона = " + endOfRange);
 

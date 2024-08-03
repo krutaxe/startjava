@@ -9,13 +9,13 @@ public class VariablesTheme {
         double sizeMonitor = 27.8;
         char energyEfficiencyClass = 'A';
         boolean isWork = true;
-        System.out.println("Колличество ядер - " + numberCores);
+        System.out.println("Количество ядер - " + numberCores);
         System.out.println("Оперативная память - " + ram);
         System.out.println("Частота процессора - " + frequencyCpu);
         System.out.println("Объём жесткого диска - " + capacityHd);
         System.out.println("Мощность блока питания - " + psuPower);
-        System.out.println("Рамер монитора - " + sizeMonitor);
-        System.out.println("Класс элетропотребления - " + energyEfficiencyClass);
+        System.out.println("Размер монитора - " + sizeMonitor);
+        System.out.println("Класс электропотребления - " + energyEfficiencyClass);
         System.out.println("В работе - " + isWork);
 
         System.out.println("\n2. Расчет стоимости товара со скидкой");
@@ -72,7 +72,7 @@ public class VariablesTheme {
         System.out.println("\nС помощью арифметических операций");
         num1 += num2;
         num2 = num1 - num2;
-        num1 -=num2;
+        num1 -= num2;
         System.out.println("num1 = " + num1 + ", " + "num2 = " + num2);
         System.out.println("\nС помощью побитовой операции ^");
         num1 ^= num2;
@@ -131,7 +131,8 @@ public class VariablesTheme {
         System.out.println("\n10.* Расчет стоимости товара со скидкой");
         BigDecimal pricePen = new BigDecimal(105.5);
         BigDecimal priceBook = new BigDecimal(235.83).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal discountPrice = pricePen.add(priceBook).multiply(BigDecimal.valueOf(11)).divide(BigDecimal.valueOf(100));
+        BigDecimal discountPrice = pricePen.add(priceBook).multiply(BigDecimal.valueOf(11))
+                .divide(BigDecimal.valueOf(100));
         System.out.println("Стоимость ручки - " + pricePen + ", " + "Стоимость книги - " + priceBook);
         System.out.println("Сумма скидки - " + discountPrice.setScale(2, RoundingMode.HALF_UP));
         System.out.println("Стоимость товаров со скидкой - " +
