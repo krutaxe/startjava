@@ -48,18 +48,13 @@ public class IfElseStatementTheme {
             System.out.println("Число является нулём");
         } else if (number % 2 == 0) {
             System.out.print("Число " + number + " является четным");
-            if (number > 0) {
-                System.out.println(" и положительным");
-            } else {
-                System.out.println(" и отрицательным");
-            }
         } else {
             System.out.print("Число " + number + " является не четным");
-            if (number > 0) {
-                System.out.println(" и положительным");
-            } else {
-                System.out.println(" и отрицательным");
-            }
+        }
+        if (number > 0) {
+            System.out.println(" и положительным");
+        } else {
+            System.out.println(" и отрицательным");
         }
 
         System.out.println("\n4. Поиск одинаковых цифр в числах");
@@ -90,13 +85,12 @@ public class IfElseStatementTheme {
         }
 
         System.out.println("\n5. Определение символа по его коду");
-        char ch = '\u0057';
-        int codeCh = (int) ch;
-        if (codeCh > 47 && codeCh < 58) {
+        char ch = '\u0035';
+        if (ch >= '1' && ch <= '9') {
             System.out.println(ch + " - цифра");
-        } else if (codeCh > 64 && codeCh < 91) {
+        } else if (ch >= 'A' && ch <= 'Z') {
             System.out.println(ch + " - большая буква");
-        } else if (codeCh > 96 && codeCh < 123) {
+        } else if (ch >= 'a' && ch <= 'z') {
             System.out.println(ch + " - маленькая буква");
         } else {
             System.out.println(ch + " ни буква и ни цифра");
@@ -104,14 +98,12 @@ public class IfElseStatementTheme {
 
         System.out.println("\n6. Подсчет начисленных банком %");
         double accaunt = 321123.59;
-        int rate;
+        int rate = 10;
         if (accaunt < 100000) {
             rate = 5;
         } else if (accaunt >= 100000 && accaunt <= 300000) {
             rate = 7;
-        } else {
-            rate = 10;
-        }
+        } 
         System.out.println("Сумма вклада = " + accaunt);
         System.out.println("Сумма начисленного % = " + accaunt * rate / 100);
         System.out.println("Итоговая сумма = " + (accaunt + (accaunt * rate / 100)));
@@ -138,18 +130,20 @@ public class IfElseStatementTheme {
         System.out.println("История - " + gradeHistory);
         System.out.println("Программирование - " + gradeProgramming);
         System.out.println("Средний бал по предметам " + (double) (gradeHistory + gradeProgramming) / 2);
-        System.out.println("Средний процент по предметам " + (double) (percentageHistory +
-                percentageProgramming) / 2);
+        System.out.println("Средний процент по предметам " +
+                (double) (percentageHistory + percentageProgramming) / 2);
 
         System.out.println("\n8.Расчет годовой прибыли");
         double sales = 13025.233;
         double rent = 5123.018;
         double costProduction = 9001.729;
         double profitYear = (sales - rent - costProduction) * 12;
+        System.out.print("Прибыль за год: ");
         if (profitYear > 0) {
-            System.out.println("Прибыль за год: " + "+" + profitYear + "руб.");
+            System.out.print("+" + profitYear);
         } else {
-            System.out.println("Прибыль за год: " + profitYear + "руб.");
+            System.out.print(profitYear);
         }
+        System.out.println("руб.");
     }
 }
