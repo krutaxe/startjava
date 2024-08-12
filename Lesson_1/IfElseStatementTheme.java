@@ -46,15 +46,17 @@ public class IfElseStatementTheme {
         int number = -5;
         if (number == 0) {
             System.out.println("Число является нулём");
-        } else if (number % 2 == 0) {
-            System.out.print("Число " + number + " является четным");
         } else {
-            System.out.print("Число " + number + " является не четным");
-        }
-        if (number > 0) {
-            System.out.println(" и положительным");
-        } else {
-            System.out.println(" и отрицательным");
+            if (number % 2 == 0) {
+                System.out.print("Число " + number + " является четным");
+            } else {
+                System.out.print("Число " + number + " является не четным");
+            }
+            if (number > 0) {
+                System.out.println(" и положительным");
+            } else {
+                System.out.println(" и отрицательным");
+            }
         }
 
         System.out.println("\n4. Поиск одинаковых цифр в числах");
@@ -95,7 +97,7 @@ public class IfElseStatementTheme {
         } else {
             System.out.println(ch + " ни буква и ни цифра");
         }
-
+        
         System.out.println("\n6. Подсчет начисленных банком %");
         double accaunt = 321123.59;
         int rate = 10;
