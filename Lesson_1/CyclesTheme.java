@@ -152,22 +152,26 @@ public class CyclesTheme {
 
         System.out.println("\n9. Проверка, является ли число счастливым");
         num = 123321;
-        int ones = num % 10;
-        int tens = num / 10 % 10;
-        int hundreds = num / 100 % 10;
-        int thousands = num / 1000 % 10;
-        int tenThousand = num / 10000 % 10;
-        int hundredThousand = num / 100000;
+        int firstHalf = num / 1000;
+        int secondHalf = num % 1000;
+        int firstHalfCopy = firstHalf;
+        int secondHalfCopy = secondHalf;
+        int firstSum = 0;
+        int secondSum = 0;
+        while (firstHalfCopy > 0) {
+            firstSum += firstHalfCopy % 10;
+            firstHalfCopy /= 10;
+            secondSum += secondHalfCopy % 10;
+            secondHalfCopy /= 10;
+        }
         System.out.print("Число " + num + " - ");
-        if ((ones + tens + hundreds) == (thousands + tenThousand + hundredThousand)) {
+        if (firstSum == secondSum) {
             System.out.println("счастливое");
         } else {
             System.out.println("обычное");
         }
-        System.out.println("Сумма цифр " + hundredThousand + tenThousand + thousands + 
-                " = " + (hundredThousand + tenThousand + thousands));
-        System.out.println("Сумма " + hundreds + tens + ones + " = " +
-                (hundreds + tens + ones));
+        System.out.println("Сумма цифр " + firstHalf + " = " + firstSum);
+        System.out.println("Сумма " + secondHalf + " = " + secondSum);
 
         System.out.println("\n10. Вывод таблицы умножения Пифагора");
         for (int i = 1; i < 10; i++) {
