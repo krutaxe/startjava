@@ -9,22 +9,23 @@ public class Calculator {
         int num2 = scanner.nextInt();
         System.out.print("Какую операцию хотите выполнить? (+, -, *, /, %, ^) ");
         char operation = scanner.next().charAt(0);
+        int result = -1;
         if (operation == '+') {
-            System.out.println(num1 + " + " + num2 + " = " + (num1 + num2));
+            result = num1 + num2;
         } else if (operation == '-') {
-            System.out.println(num1 + " - " + num2 + " = " + (num1 - num2));
+            result = num1 - num2;
         } else if (operation == '*') {
-            System.out.println(num1 + " * " + num2 + " = " + (num1 * num2));
+            result = num1 * num2;
         } else if (operation == '/') {
-            System.out.println(num1 + " / " + num2 + " = " + (num1 / num2));
+            result = num1 / num2;
         } else if (operation == '%') {
-            System.out.println(num1 + " % " + num2 + " = " + (num1 % num2));
+            result = num1 % num2;
         } else if (operation == '^') {
-            int result = num1;
-            for (int i = 0; i < num2 - 1; i++) {
+            result = num1;
+            for (int i = 1; i <= num2 - 1; i++) {
                 result *= num1;
             }
-            System.out.println(num1 + " ^ " + num2 + " = " + result);
         }
+        System.out.println(num1 + " " + operation + " " + num2 + " = " + result);
     }
 }
