@@ -7,32 +7,32 @@ public class GuessNumberTest {
         Player player1 = new Player(scanner.nextLine());
         System.out.println("Введите имя второго игрока: ");
         Player player2 = new Player(scanner.nextLine());
-        GuessNumber guessNumber = new GuessNumber(player1, player2, true);
-        boolean repeateble = true;
+        GuessNumber guessNumber = new GuessNumber(player1, player2);
+        String answerRepeate = "yes";
 
-        while (repeateble) {
+        while (answerRepeate.equals("yes")) {
             int hiddenNumber = (int) (Math.random() * 100) + 1;
             System.out.println("Компьютер загадал число!!!");
 
-            while (guessNumber.isFlag()) {
-                guessNumber.selectNumber(player1, scanner);
-                guessNumber.guess(hiddenNumber, player1);
-
-                guessNumber.selectNumber(player2, scanner);
-                guessNumber.guess(hiddenNumber, player2);
+            while (true) {
+                if (guessNumber.guess(hiddenNumber, player1, scanner)) {
+                    break;
+                }
+                if (guessNumber.guess(hiddenNumber, player2, scanner)) {
+                    break;
+                }
             }
 
             System.out.print("Хотите продолжить игру? [yes/no]: ");
             scanner.nextLine();
             String answer = scanner.nextLine();
             while (!(answer.equals("no") || answer.equals("yes"))) {
-                System.out.print("Хотите продолжить вычисления? [yes/no]: ");
+                System.out.print("Хотите продолжить игру? [yes/no]: ");
                 answer = scanner.nextLine();
             }
             if (answer.equals("no")) {
-                repeateble = false;
-            } else if (answer.equals("yes")) {
-                guessNumber.setFlag(true);
+                answerRepeate = "no";
+                System.out.println("Game over!!!");
             }
         }
     }

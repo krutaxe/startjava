@@ -3,12 +3,10 @@ import java.util.Scanner;
 public class GuessNumber {
     private Player player1;
     private Player player2;
-    private boolean flag;
 
-    public GuessNumber(Player player1, Player player2, boolean flag) {
+    public GuessNumber(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
-        this.flag = flag;
     }
 
     public Player getPlayer1() {
@@ -27,18 +25,12 @@ public class GuessNumber {
         this.player2 = player2;
     }
 
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public void guess(int hiddenNumber, Player player) {
+    public boolean guess(int hiddenNumber, Player player, Scanner scanner) {
+        selectNumber(player, scanner);
+        boolean result = false;
         if (hiddenNumber == player.getNumber()) {
             System.out.println("Победил игрок по имени: " + player.getName());
-            flag = false;
+            result = true;
         } else {
             System.out.println("Не угадал!!!");
             if (player.getNumber() > hiddenNumber) {
@@ -47,9 +39,10 @@ public class GuessNumber {
                 System.out.println(player.getNumber() + " это меньше того, что загадал компьютер");
             }
         }
+        return result;
     }
 
-    public void selectNumber(Player player, Scanner scanner) {
+    private void selectNumber(Player player, Scanner scanner) {
         System.out.print("Player " + player.getName() + " введите число : ");
         player.setNumber(scanner.nextInt());
     }
