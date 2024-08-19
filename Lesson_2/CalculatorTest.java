@@ -22,12 +22,12 @@ public class CalculatorTest {
 
             System.out.print("Введите второе число: ");
             int num2 = scanner.nextInt();
-            if (operation == '/' && num2 == 0) {
+            if ((operation == '/' || operation == '%') && num2 == 0) {
                 System.out.println("Ошибка: деление на ноль запрещено!!!");
             }
             
             Calculator calculator = new Calculator();
-            double result = calculator.calculation(num1, num2, operation);
+            double result = calculator.calculate(num1, num2, operation);
             
             System.out.println(num1 + " " + operation + " " + num2 + " = " + result);
             System.out.print("Хотите продолжить вычисления? [yes/no]: ");
