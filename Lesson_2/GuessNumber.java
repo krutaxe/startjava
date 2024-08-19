@@ -9,28 +9,30 @@ public class GuessNumber {
         this.player2 = player2;
     }
 
-    public Player getPlayer1() {
-        return player1;
+    public void start(Scanner scanner) {
+        int hiddenNumber = (int) (Math.random() * 100) + 1;
+        System.out.println("Компьютер загадал число!!!");
+        while (true) {
+            inputNumber(player1, scanner);
+            if (check(player1, hiddenNumber)) {
+                break;
+            }
+            inputNumber(player2, scanner);
+            if (check(player2, hiddenNumber)) {
+                break;
+            }
+        }
     }
 
-    public void setPlayer1(Player player1) {
-        this.player1 = player1;
+    private void inputNumber(Player player, Scanner scanner) {
+        System.out.print("Player " + player.getName() + " введите число : ");
+        player.setNumber(scanner.nextInt());
     }
 
-    public Player getPlayer2() {
-        return player2;
-    }
-
-    public void setPlayer2(Player player2) {
-        this.player2 = player2;
-    }
-
-    public boolean guess(int hiddenNumber, Player player, Scanner scanner) {
-        selectNumber(player, scanner);
-        boolean result = false;
+    private boolean check(Player player, int hiddenNumber) {
         if (hiddenNumber == player.getNumber()) {
             System.out.println("Победил игрок по имени: " + player.getName());
-            result = true;
+            return true;
         } else {
             System.out.println("Не угадал!!!");
             if (player.getNumber() > hiddenNumber) {
@@ -39,11 +41,6 @@ public class GuessNumber {
                 System.out.println(player.getNumber() + " это меньше того, что загадал компьютер");
             }
         }
-        return result;
-    }
-
-    private void selectNumber(Player player, Scanner scanner) {
-        System.out.print("Player " + player.getName() + " введите число : ");
-        player.setNumber(scanner.nextInt());
+        return false;
     }
 }
