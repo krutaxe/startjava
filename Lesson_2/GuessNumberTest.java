@@ -12,16 +12,12 @@ public class GuessNumberTest {
 
         while (answer.equals("yes")) {
             guessNumber.start(scanner);
-            System.out.print("Хотите продолжить игру? [yes/no]: ");
-            scanner.nextLine();
-            answer = scanner.nextLine();
-            while (!(answer.equals("no") || answer.equals("yes"))) {
+            do {
                 System.out.print("Хотите продолжить игру? [yes/no]: ");
+                scanner.nextLine();
                 answer = scanner.nextLine();
-            }
-            if (answer.equals("no")) {
-                System.out.println("Game over!!!");
-            }
+            } while (!answer.equals("no") && !answer.equals("yes"));
         }
+        System.out.println("Вы вышли из игры!");
     }
 }

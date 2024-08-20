@@ -14,32 +14,31 @@ public class GuessNumber {
         System.out.println("Компьютер загадал число!!!");
         while (true) {
             inputNumber(player1, scanner);
-            if (check(player1, hiddenNumber)) {
+            if (isGuessed(player1, hiddenNumber)) {
                 break;
             }
             inputNumber(player2, scanner);
-            if (check(player2, hiddenNumber)) {
+            if (isGuessed(player2, hiddenNumber)) {
                 break;
             }
         }
     }
 
     private void inputNumber(Player player, Scanner scanner) {
-        System.out.print("Player " + player.getName() + " введите число : ");
+        System.out.print(player.getName() + " введите число ");
         player.setNumber(scanner.nextInt());
     }
 
-    private boolean check(Player player, int hiddenNumber) {
+    private boolean isGuessed(Player player, int hiddenNumber) {
         if (hiddenNumber == player.getNumber()) {
             System.out.println("Победил игрок по имени: " + player.getName());
             return true;
-        } else {
-            System.out.println("Не угадал!!!");
-            if (player.getNumber() > hiddenNumber) {
-                System.out.println(player.getNumber() + " это больше того, что загадал компьютер");
-            } else if (player.getNumber() < hiddenNumber) {
-                System.out.println(player.getNumber() + " это меньше того, что загадал компьютер");
-            }
+        }
+        System.out.println("Не угадал!!!");
+        if (player.getNumber() > hiddenNumber) {
+            System.out.println(player.getNumber() + " это больше того, что загадал компьютер");
+        } else if (player.getNumber() < hiddenNumber) {
+            System.out.println(player.getNumber() + " это меньше того, что загадал компьютер");
         }
         return false;
     }
