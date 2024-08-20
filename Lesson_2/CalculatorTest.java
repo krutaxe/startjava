@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String answerRepeate = "yes";
+        String answer = "yes";
 
-        while (answerRepeate.equals("yes")) {
+        while (answer.equals("yes")) {
             System.out.print("Введите первое число: ");
             final int num1 = scanner.nextInt();
 
@@ -22,25 +22,22 @@ public class CalculatorTest {
 
             System.out.print("Введите второе число: ");
             int num2 = scanner.nextInt();
-            if ((operation == '/' || operation == '%') && num2 == 0) {
+            while ((operation == '/' || operation == '%') && num2 == 0) {
                 System.out.println("Ошибка: деление на ноль запрещено!!!");
+                System.out.print("Введите второе число: ");
+                num2 = scanner.nextInt();
             }
-            
+
             Calculator calculator = new Calculator();
             double result = calculator.calculate(num1, num2, operation);
-            
             System.out.println(num1 + " " + operation + " " + num2 + " = " + result);
-            System.out.print("Хотите продолжить вычисления? [yes/no]: ");
-            scanner.nextLine();
-            String answer = scanner.nextLine();
-            while (!(answer.equals("no") || answer.equals("yes"))) {
+            
+            do {
                 System.out.print("Хотите продолжить вычисления? [yes/no]: ");
+                scanner.nextLine();
                 answer = scanner.nextLine();
-            }
-            if (answer.equals("no")) {
-                answerRepeate = "no";
-                System.out.println("Завершение работы калькулятора.");
-            }
+            } while (!answer.equals("no") && !answer.equals("yes"));
         }
+        System.out.println("Завершение работы калькулятора.");
     }
 }
