@@ -9,7 +9,7 @@ public class ExampleMethods {
                 "() -> выбрать пункт меню в текстовом редакторе на macOS");
     }
 
-    public void calculateAverageGrades() {
+    public void calcAvgGrades() {
         System.out.println(ExampleStaticMethod.getNameThisMethod() +
                 "() -> вычислить среднее значение оценок в школе №1234");
     }
@@ -44,22 +44,22 @@ public class ExampleMethods {
                 "() -> сбросить настройки до заводских для пылесоса Mi");
     }
 
-    public void writeToFlash() {
+    public void writeToFile() {
         System.out.println(ExampleStaticMethod.getNameThisMethod() +
                 "() -> записать содержимое в файл по указанному пути на флешку");
     }
 
-    public void convertTemperature() {
+    public void converToFahrenheit() {
         System.out.println(ExampleStaticMethod.getNameThisMethod() +
                 "() -> преобразовать температуру из Цельсия в Фаренгейт");
     }
 
-    public void enterMathematicalExpression() {
+    public void enterMathExpression() {
         System.out.println(ExampleStaticMethod.getNameThisMethod() +
                 "() -> ввести математическое выражение с тремя аргументами");
     }
 
-    public void identifyWinnerRacers() {
+    public void identifyWinner() {
         System.out.println(ExampleStaticMethod.getNameThisMethod() +
                 "() -> выявить победителя среди гонщиков игры \"Need For Speed\"");
     }
