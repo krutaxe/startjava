@@ -1,3 +1,5 @@
+package com.startjava.lesson_2_3.method.naming;
+
 public class ExampleBooleanMethods {
     public boolean isProgramContinue() {
         System.out.print(MethodUtils.getCurrentMethodName() +

@@ -1,3 +1,5 @@
+package com.startjava.lesson_2_3.method.naming;
+
 public class MethodsTest {
     public static void main(String[] args) {
         MethodsTest test = new MethodsTest();
