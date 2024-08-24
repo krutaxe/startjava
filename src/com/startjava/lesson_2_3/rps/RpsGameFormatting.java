@@ -1,62 +1,75 @@
 package com.startjava.lesson_2_3.rps;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class RpsGameFormatting {
+    private static final String ROCK = "R";
+    private static final String SCISSORS = "S";
+    private static final String PAPER = "P";
+
     public static void main(String[] args) throws InterruptedException {
-        String rock ="✊";
-        String scissors = "✌";
-        String paper = "✋" ;
-        String name1 = "HEL";
-        Random random = new Random();
-        int position1 = random.nextInt(1, 100);
-        String sign1 = rock;
-        if (position1 > 66) {
-            sign1 = paper;
-        } else if (position1 > 33) {
-            sign1 = scissors;
+        Random r = new Random();
+        Scanner console = new Scanner(System.in);
+        String name1 = inputName(console);
+        String name2 = inputName(console);
+
+        int position = generatePosition(name1, r);
+        String sign1 = defineSign(position);
+        showSigns(sign1);
+
+        position = generatePosition(name2, r);
+        String sign2 = defineSign(position);
+        showSigns(sign2);
+
+        defineWinner(name1, sign1, name2, sign2);
+    }
+
+    private static String inputName(Scanner console) {
+        System.out.print("Введите имя игрока: ");
+        return console.nextLine();
+    }
+
+    private static int generatePosition(String name1, Random r) {
+        System.out.println("Ход " + name1 + ": ");
+        return r.nextInt(1, 100);
+    }
+
+    private static String defineSign(int position) {
+        String sign = SCISSORS;
+        if (position > 66) {
+            sign = ROCK;
+        } else if (position > 33) {
+            sign = PAPER;
         }
-        System.out.println("Ход "+ name1 + ": ");
+        return sign;
+    }
+
+    private static void showSigns(String sign) throws InterruptedException {
         for (int i = 0; i < 5; i++) {
-            System.out.print(rock + "\r") ;
+            System.out.print(ROCK + "\r");
             Thread.sleep(100);
-            System.out.print(scissors + "\r");
+            System.out.print(SCISSORS + "\r");
             Thread.sleep(100);
-            System.out.print(paper + "\r");
-            Thread.sleep(100);
-        }
-        System.out.println(sign1);
-        String name2 = "WALLE";
-        int position2 = random.nextInt(1,100);
-        String sign2 = rock;
-        if (position2 > 66) {
-            sign2 = paper;
-        } else {
-            if (position2 > 33) {
-                sign2 = scissors;
-            }
-        }
-        System.out.println("Ход " + name2 +": ");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(rock + "\r");
-            Thread.sleep(100);
-            System.out.print(scissors + "\r");
-            Thread.sleep(100);
-            System.out.print(paper + "\r");
+            System.out.print(PAPER + "\r");
             Thread.sleep(100);
         }
-        System.out.println(sign2);
+        System.out.println(sign);
+    }
+
+    private static void defineWinner(String name1, String sign1, String name2, String sign2) {
         if (sign1.equals(sign2)) {
-            System.out.println("Победила дружба!");
-            return;
-        }
-        boolean isEqualName1 = sign1.equals(rock) && sign2.equals(scissors) ||
-            sign1.equals(scissors) && sign2.equals(paper) ||
-            sign1.equals(paper) && sign2.equals(rock);
-        if (isEqualName1) {
-        System.out.println("\nПобедил - " + name1);
+            System.out.println("\nПобедила дружба!");
         } else {
-            System.out.println("\nПобедил - " + name2);
+            boolean isEqualName1 = sign1.equals(ROCK) && sign2.equals(SCISSORS) ||
+                    sign1.equals(SCISSORS) && sign2.equals(PAPER) ||
+                    sign1.equals(PAPER) && sign2.equals(ROCK);
+
+            if (isEqualName1) {
+                System.out.println("\nПобедил - " + name1);
+            } else {
+                System.out.println("\nПобедил - " + name2);
+            }
         }
     }
 }
