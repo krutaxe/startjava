@@ -1,5 +1,8 @@
 package com.startjava.lesson_1.base;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class VariablesTheme {
     public static void main(String[] args) {
         System.out.println("1. Вывод характеристик компьютера");
@@ -12,7 +15,7 @@ public class VariablesTheme {
         char energyEfficiencyClass = 'A';
         boolean isWork = true;
         System.out.println("Количество ядер - " + numberCores);
-        System.out.println("Оперативная память - " + ram);
+        System.out.println("Оперативная память - " + ramPc);
         System.out.println("Частота процессора - " + frequencyCpu);
         System.out.println("Объём жесткого диска - " + capacityHd);
         System.out.println("Мощность блока питания - " + psuPower);
@@ -131,13 +134,13 @@ public class VariablesTheme {
         System.out.println(hh + ":" + mm + ":" + ss);
 
         System.out.println("\n10.* Расчет стоимости товара со скидкой");
-        BigDecimal pricePen = new BigDecimal(105.5);
-        BigDecimal priceBook = new BigDecimal(235.83).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal discountPrice = pricePen.add(priceBook).multiply(BigDecimal.valueOf(11))
+        BigDecimal pricePenBd = new BigDecimal("105.5");
+        BigDecimal priceBookBd = new BigDecimal("235.83").setScale(2, RoundingMode.HALF_UP);
+        BigDecimal discountPriceBd = pricePenBd.add(priceBookBd).multiply(BigDecimal.valueOf(11))
                 .divide(BigDecimal.valueOf(100));
         System.out.println("Стоимость ручки - " + pricePen + ", " + "Стоимость книги - " + priceBook);
-        System.out.println("Сумма скидки - " + discountPrice.setScale(2, RoundingMode.HALF_UP));
+        System.out.println("Сумма скидки - " + discountPriceBd.setScale(2, RoundingMode.HALF_UP));
         System.out.println("Стоимость товаров со скидкой - " +
-                pricePen.add(priceBook).subtract(discountPrice).setScale(2, RoundingMode.HALF_UP));
+                pricePenBd.add(priceBookBd).subtract(discountPriceBd).setScale(2, RoundingMode.HALF_UP));
     }
 }
