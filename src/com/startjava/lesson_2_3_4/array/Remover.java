@@ -1,9 +1,15 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.util.Arrays;
 import java.util.Random;
 
-public class DeletingArrayElement {
+public class Remover {
+
+    public static void main(String[] args) {
+        removeExceedingValues(-1);
+        removeExceedingValues(15);
+        removeExceedingValues(0);
+        removeExceedingValues(14);
+    }
 
     public static void removeExceedingValues(int index) {
         double[] inputArray = fillArray();
@@ -16,14 +22,7 @@ public class DeletingArrayElement {
         outputArray(inputArray);
         outputArray(modArray);
         System.out.printf("значение из ячейки по переданному адресу " + "%.3f\n", modArray[index]);
-        System.out.println("количество обнуленных ячеек " + (modArray.length - (index + 1))+ "\n");
-    }
-
-    public static void main(String[] args) {
-        removeExceedingValues(-1);
-        removeExceedingValues(15);
-        removeExceedingValues(0);
-        removeExceedingValues(14);
+        System.out.println("количество обнуленных ячеек " + (modArray.length - (index + 1)) + "\n");
     }
 
     private static double[] fillArray() {

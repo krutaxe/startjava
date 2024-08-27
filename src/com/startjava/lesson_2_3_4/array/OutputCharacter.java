@@ -2,6 +2,12 @@ package com.startjava.lesson_2_3_4.array;
 
 public class OutputCharacter {
 
+    public static void main(String[] args) {
+        sortedCharTriangle('0', '9', true);
+        sortedCharTriangle('/', '!', false);
+        sortedCharTriangle('A', 'J', false);
+    }
+
     public static void sortedCharTriangle(char start, char end, boolean sort) {
         if (start > end) {
             System.out.println("Ошибка: левая граница (" + (int) start + ") > правой (" + (int) end + ")");
@@ -22,11 +28,5 @@ public class OutputCharacter {
             }
         }
         System.out.println(stringBuilder);
-    }
-
-    public static void main(String[] args) {
-        sortedCharTriangle('0', '9', true);
-        sortedCharTriangle('/', '!', false);
-        sortedCharTriangle('A', 'J', false);
     }
 }

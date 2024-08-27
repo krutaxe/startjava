@@ -1,6 +1,16 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class OutputText {
+
+    public static void main(String[] args) throws InterruptedException {
+        typewriterEffect("Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n"
+                + "- James Gosling");
+        typewriterEffect("Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n"
+                + "- Robert Martin");
+        typewriterEffect(null);
+        typewriterEffect("");
+    }
+
     public static void typewriterEffect(String text) throws InterruptedException {
         if (isNull(text) || isEmpty(text)) {
             return;
@@ -22,9 +32,9 @@ public class OutputText {
             }
         }
 
-        for (String word: wordsWithPunctuation) {
+        for (String word : wordsWithPunctuation) {
             String[] letter = word.split("");
-            for (String l: letter) {
+            for (String l : letter) {
                 System.out.print(l);
                 Thread.sleep(100);
             }
@@ -33,17 +43,20 @@ public class OutputText {
         System.out.println();
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        String text1 = "Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n"
-                + "- James Gosling";
-       String text2 = "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n"
-               + "- Robert Martin";
-       String text3 = "";
+    private static boolean isNull(String text) {
+        if (text == null) {
+            System.out.println("Ошибка: текст не должен быть null.");
+            return true;
+        }
+        return false;
+    }
 
-       typewriterEffect(text1);
-       typewriterEffect(text2);
-       typewriterEffect(null);
-       typewriterEffect(text3);
+    private static boolean isEmpty(String text) {
+        if (text.length() == 0) {
+            System.out.println("Ошибка: текст не должен быть пустой.");
+            return true;
+        }
+        return false;
     }
 
     private static int findMaxLengthWord(String[] words) {
@@ -68,21 +81,5 @@ public class OutputText {
             }
         }
         return result;
-    }
-
-    private static boolean isNull(String text) {
-        if (text == null) {
-            System.out.println("Ошибка: текст не должен быть null.");
-            return true;
-        }
-        return false;
-    }
-
-    private static boolean isEmpty(String text) {
-        if (text.length() == 0) {
-            System.out.println("Ошибка: текст не должен быть пустой.");
-            return true;
-        }
-        return false;
     }
 }
