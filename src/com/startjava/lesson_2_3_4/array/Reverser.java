@@ -2,8 +2,15 @@ package com.startjava.lesson_2_3_4.array;
 
 import java.util.Arrays;
 
-public class Manipulator {
-    public static void reverse(int[] originalArray) {
+public class Reverser {
+    public static void main(String[] args) {
+        reverse(null);
+        reverse(new int[]{});
+        reverse(new int[]{6, 8, 9, 1});
+        reverse(new int[]{13, 8, 5, 3, 2, 1, 1});
+    }
+
+    private static void reverse(int[] originalArray) {
         if (originalArray == null || originalArray.length == 0) {
             System.out.println("\nМассив пустой");
             return;
@@ -16,12 +23,5 @@ public class Manipulator {
         }
         System.out.println("\n   До реверса: " + Arrays.toString(originalArray));
         System.out.println("После реверса: " + Arrays.toString(reversedArray));
-    }
-
-    public static void main(String[] args) {
-        reverse(null);
-        reverse(new int[]{});
-        reverse(new int[]{6, 8, 9, 1});
-        reverse(new int[]{13, 8, 5, 3, 2, 1, 1});
     }
 }

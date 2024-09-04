@@ -1,16 +1,21 @@
 package com.startjava.lesson_2_3_4.array;
 
+import java.util.Arrays;
+
 public class FactorialCalculator {
+    private static final long[] FACTORIALS = new long[7];
+    private static int count = 0;
 
     public static void main(String[] args) {
-        calculateFactorial(new int[]{});
-        calculateFactorial(null);
-        calculateFactorial(8, 0, 9);
-        calculateFactorial(-3, 1, 7, 13);
-        calculateFactorial(-22, -0);
+        calc(new int[]{});
+        calc(null);
+        calc(8, 0, 9);
+        calc(-3, 1, 7, 13);
+        calc(-22, -0);
+        System.out.println(Arrays.toString(FACTORIALS));
     }
 
-    public static void calculateFactorial(int... numbers) {
+    private static void calc(int... numbers) {
         if (numbers == null) {
             System.out.println("Ошибка: массив не должен быть null.\n");
             return;
@@ -26,6 +31,8 @@ public class FactorialCalculator {
                 System.out.println("Ошибка: факториал " + num + "! не определен");
             } else if (num == 0 || num == 1) {
                 System.out.println(num + "! = 1");
+                FACTORIALS[count] = 1;
+                count++;
             } else {
                 long factorial = 1;
                 System.out.print(num + "! = " + factorial);
@@ -35,6 +42,8 @@ public class FactorialCalculator {
                 }
                 System.out.print(" = " + factorial);
                 System.out.println();
+                FACTORIALS[count] = factorial;
+                count++;
             }
         }
         System.out.println();

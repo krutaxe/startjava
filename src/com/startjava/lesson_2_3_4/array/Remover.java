@@ -11,18 +11,27 @@ public class Remover {
         removeExceedingValues(14);
     }
 
-    public static void removeExceedingValues(int index) {
+    private static void removeExceedingValues(int index) {
         double[] inputArray = fillArray();
-        if (index > inputArray.length - 1 || index < 0) {
+        if ((inputArray.length - 1) < index || index < 0) {
             System.out.println("Ошибка: индекс за пределами границ массива!\n");
             return;
         }
         double[] modArray = new double[15];
-        System.arraycopy(inputArray, 0, modArray, 0, index + 1);
+        int count = 0;
+        for (int i = 0; i < inputArray.length; i++) {
+            if (inputArray[index] < inputArray[i]) {
+                modArray[i] = 0;
+                count++;
+            } else {
+                modArray[i] = inputArray[i];
+            }
+        }
+
         outputArray(inputArray);
         outputArray(modArray);
-        System.out.printf("значение из ячейки по переданному адресу " + "%.3f\n", modArray[index]);
-        System.out.println("количество обнуленных ячеек " + (modArray.length - (index + 1)) + "\n");
+        System.out.printf("значение из ячейки по переданному адресу " + "%.3f\n%s", modArray[index],
+                "количество обнуленных ячеек " + count + "\n");
     }
 
     private static double[] fillArray() {
@@ -36,10 +45,10 @@ public class Remover {
 
     private static void outputArray(double[] array) {
         for (int i = 0; i < array.length; i++) {
-            if (i == 8) {
+            if (i == (array.length + 1) / 2) {
                 System.out.println();
             }
-            System.out.printf("%.3f %s", array[i], " ");
+            System.out.printf("%.3f ", array[i]);
         }
         System.out.println();
     }
