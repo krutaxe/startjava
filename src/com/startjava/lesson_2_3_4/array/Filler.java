@@ -6,40 +6,43 @@ import java.util.Random;
 public class Filler {
 
     public static void main(String[] args) {
-        fillUniqueValues(-10, 20, 23);
+        fillUniqueNumbers(-10, 20, 23);
         System.out.println();
 
-        fillUniqueValues(-30, 10, 10);
+        fillUniqueNumbers(-30, 10, 10);
         System.out.println();
 
-        fillUniqueValues(-34, -34, 0);
+        fillUniqueNumbers(-34, -34, 0);
         System.out.println();
 
-        fillUniqueValues(-1, 2, -3);
+        fillUniqueNumbers(-1, 2, -3);
         System.out.println();
 
-        fillUniqueValues(5, -8, 2);
+        fillUniqueNumbers(5, -8, 2);
     }
 
-    public static void fillUniqueValues(int start, int end, int numbersPerLine) {
-        if (!validateInput(start, end, numbersPerLine)) {
+    public static void fillUniqueNumbers(int start, int end, int numbersPerLine) {
+        if (!isValidInput(start, end, numbersPerLine)) {
             return;
         }
 
-        int newArrayLen = (int) ((end - start) * 0.75);
-        int[] array = new int[newArrayLen];
+        int len = (int) ((end - start) * 0.75);
+        int[] uniqueNumbers = new int[len];
         Random random = new Random();
-        for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt();
+        for (int i = 0; i < uniqueNumbers.length; i++) {
+            int randomNumber = random.nextInt(end - start + 1) + start;
+            if (!uniqCheck(uniqueNumbers, randomNumber, i)) {
+                i--;
+            }
         }
 
-        outputArray(array, numbersPerLine);
-        Arrays.sort(array);
+        outputArray(uniqueNumbers, numbersPerLine);
+        Arrays.sort(uniqueNumbers);
         System.out.println();
-        outputArray(array, numbersPerLine);
+        outputArray(uniqueNumbers, numbersPerLine);
     }
 
-    private static boolean validateInput(int start, int end, int numbersPerLine) {
+    private static boolean isValidInput(int start, int end, int numbersPerLine) {
         boolean isValid = true;
         if (numbersPerLine < 1) {
             System.out.println("Ошибка: количество чисел в строке не может быть меньше 1 (" + numbersPerLine + ")");
@@ -66,5 +69,15 @@ public class Filler {
             System.out.print(array[i] + " ");
         }
         System.out.println();
+    }
+
+    private static boolean uniqCheck(int[] uniqueNumbers, int randomNumber, int index) {
+        for (int uniqueNumber : uniqueNumbers) {
+            if (uniqueNumber == randomNumber) {
+                return false;
+            }
+        }
+        uniqueNumbers[index] = randomNumber;
+        return true;
     }
 }

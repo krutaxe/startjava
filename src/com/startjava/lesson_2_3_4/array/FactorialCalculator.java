@@ -1,10 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
-import java.util.Arrays;
-
 public class FactorialCalculator {
-    private static final long[] FACTORIALS = new long[7];
-    private static int count = 0;
 
     public static void main(String[] args) {
         calc(new int[]{});
@@ -12,7 +8,6 @@ public class FactorialCalculator {
         calc(8, 0, 9);
         calc(-3, 1, 7, 13);
         calc(-22, -0);
-        System.out.println(Arrays.toString(FACTORIALS));
     }
 
     private static void calc(int... numbers) {
@@ -26,12 +21,14 @@ public class FactorialCalculator {
             return;
         }
 
-        for (Integer num : numbers) {
+        long[] factorials = new long[numbers.length];
+        int count = 0;
+        for (int num : numbers) {
             if (num < 0) {
                 System.out.println("Ошибка: факториал " + num + "! не определен");
             } else if (num == 0 || num == 1) {
                 System.out.println(num + "! = 1");
-                FACTORIALS[count] = 1;
+                factorials[count] = 1;
                 count++;
             } else {
                 long factorial = 1;
@@ -42,8 +39,18 @@ public class FactorialCalculator {
                 }
                 System.out.print(" = " + factorial);
                 System.out.println();
-                FACTORIALS[count] = factorial;
+                factorials[count] = factorial;
                 count++;
+            }
+        }
+        factorialsPrint(factorials);
+        System.out.println();
+    }
+
+    private static void factorialsPrint(long[] factorials) {
+        for (long factorial : factorials) {
+            if (factorial != 0) {
+                System.out.print(factorial + "; ");
             }
         }
         System.out.println();

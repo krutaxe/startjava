@@ -13,14 +13,14 @@ public class Remover {
 
     private static void removeExceedingValues(int index) {
         double[] inputArray = fillArray();
-        if ((inputArray.length - 1) < index || index < 0) {
+        if (index < 0 || index > (inputArray.length - 1)) {
             System.out.println("Ошибка: индекс за пределами границ массива!\n");
             return;
         }
         double[] modArray = new double[15];
         int count = 0;
         for (int i = 0; i < inputArray.length; i++) {
-            if (inputArray[index] < inputArray[i]) {
+            if (inputArray[i] > inputArray[index]) {
                 modArray[i] = 0;
                 count++;
             } else {
@@ -30,8 +30,11 @@ public class Remover {
 
         outputArray(inputArray);
         outputArray(modArray);
-        System.out.printf("значение из ячейки по переданному адресу " + "%.3f\n%s", modArray[index],
-                "количество обнуленных ячеек " + count + "\n");
+        System.out.printf("""
+                        значение из ячейки по переданному адресу %.3f
+                        %s
+                        """, modArray[index],
+                "количество обнуленных ячеек " + count);
     }
 
     private static double[] fillArray() {
