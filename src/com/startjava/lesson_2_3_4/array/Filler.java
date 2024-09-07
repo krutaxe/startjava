@@ -31,12 +31,11 @@ public class Filler {
         Random random = new Random();
         for (int i = 0; i < uniqueNumbers.length; i++) {
             int randomNumber = random.nextInt(end - start + 1) + start;
-            if (!uniqCheck(uniqueNumbers, randomNumber, i)) {
+            if (!isUnique(uniqueNumbers, randomNumber, i)) {
                 i--;
             }
         }
 
-        outputArray(uniqueNumbers, numbersPerLine);
         Arrays.sort(uniqueNumbers);
         System.out.println();
         outputArray(uniqueNumbers, numbersPerLine);
@@ -66,12 +65,12 @@ public class Filler {
             if (i % numbersPerLine == 0 && i != 0) {
                 System.out.println();
             }
-            System.out.print(array[i] + " ");
+            System.out.printf("%4d", array[i]);
         }
         System.out.println();
     }
 
-    private static boolean uniqCheck(int[] uniqueNumbers, int randomNumber, int index) {
+    private static boolean isUnique(int[] uniqueNumbers, int randomNumber, int index) {
         for (int uniqueNumber : uniqueNumbers) {
             if (uniqueNumber == randomNumber) {
                 return false;
