@@ -7,17 +7,9 @@ public class Filler {
 
     public static void main(String[] args) {
         fillUniqueNumbers(-10, 20, 23);
-        System.out.println();
-
         fillUniqueNumbers(-30, 10, 10);
-        System.out.println();
-
         fillUniqueNumbers(-34, -34, 0);
-        System.out.println();
-
         fillUniqueNumbers(-1, 2, -3);
-        System.out.println();
-
         fillUniqueNumbers(5, -8, 2);
     }
 
@@ -39,6 +31,7 @@ public class Filler {
         Arrays.sort(uniqueNumbers);
         System.out.println();
         outputArray(uniqueNumbers, numbersPerLine);
+        System.out.println();
     }
 
     private static boolean isValidInput(int start, int end, int numbersPerLine) {

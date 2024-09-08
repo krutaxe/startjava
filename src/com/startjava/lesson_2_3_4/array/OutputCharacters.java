@@ -17,12 +17,12 @@ public class OutputCharacters {
         int maxRows = end - start;
         StringBuilder triangle = new StringBuilder();
         if (asc) {
-            for (int value = start; value <= end + 1; value++) {
-                appendRow(triangle, true, value, start, maxRows);
+            for (int i = start; i <= end + 1; i++) {
+                appendRow(triangle, true, i, start, maxRows);
             }
         } else {
-            for (int value = end; value >= start; value--) {
-                appendRow(triangle, false, value, start, maxRows);
+            for (int i = end; i >= start; i--) {
+                appendRow(triangle, false, i, start, maxRows);
             }
         }
         System.out.println(triangle);
@@ -31,10 +31,10 @@ public class OutputCharacters {
     private static void appendRow(StringBuilder triangle, boolean asc, int value, int start, int maxRows) {
         int spaces = asc ? maxRows - (value - start - 1) : value - start;
         int repeats = asc ? Math.max(0, ((value - start) * 2 - 1)) : Math.max(0, ((maxRows + start - value) * 2 - 1));
-        int val = asc ? value - 1 : value;
+        value = asc ? (value - 1) : value;
 
         triangle.append(" ".repeat(Math.max(0, spaces)));
-        triangle.append(String.valueOf((char) val).repeat(repeats));
+        triangle.append(String.valueOf((char) value).repeat(repeats));
         triangle.append(System.lineSeparator());
     }
 }

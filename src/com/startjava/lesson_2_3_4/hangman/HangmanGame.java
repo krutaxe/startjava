@@ -4,9 +4,18 @@ import java.lang.Character.UnicodeScript;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class HangmanLogic {
+public class HangmanGame {
+
     private static final String[] WORDS = {"телефон", "дом", "кошка", "компьютер", "зонт", "дерево"};
-    private static final int MAX_TRIES = 7;
+    private static final String[] HANGMAN_ARRAY = {
+            "____ \n",
+            "   |   \n",
+            "   |   \n",
+            "   O   \n",
+            "  /|\\ \n",
+            "  / \\ \n"
+    };
+    private static final int MAX_TRIES = HANGMAN_ARRAY.length;
     private static int tries;
 
     public static void main(String[] args) {
@@ -53,7 +62,7 @@ public class HangmanLogic {
             hangmanPrint(tries);
         }
 
-        if ((MAX_TRIES - tries) == 0) {
+        if (MAX_TRIES == tries) {
             System.out.println("Вы проиграли!!!");
         } else {
             System.out.println("Вы победили!!!");
@@ -62,7 +71,7 @@ public class HangmanLogic {
     }
 
     private static String randomWord() {
-        return WORDS[(int)(Math.random() * WORDS.length)];
+        return WORDS[(int) (Math.random() * WORDS.length)];
     }
 
     private static boolean isExistLetter(String[] hiddenWordLetters, String letter, String[] guessLetters) {
@@ -94,9 +103,9 @@ public class HangmanLogic {
     }
 
     private static boolean isExistGuessLetter(String[] guessLetters, String letter) {
-        for (String str: guessLetters) {
+        for (String str : guessLetters) {
             if (letter.equalsIgnoreCase(str)) {
-                return  true;
+                return true;
             }
         }
         return false;
@@ -114,9 +123,8 @@ public class HangmanLogic {
     }
 
     private static void hangmanPrint(int index) {
-        String[] hangmanArray = {"___ \n", "   |   \n", "   O   \n", "  /", "|", "\\\n", "  / \\\n"};
         for (int i = 0; i < index; i++) {
-            System.out.print(hangmanArray[i]);
+            System.out.print(HangmanGame.HANGMAN_ARRAY[i]);
         }
     }
 }
