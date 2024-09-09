@@ -13,14 +13,21 @@ public class OutputText {
     }
 
     public static void typewriterEffect(String text) throws InterruptedException {
-        if (!isValidText(text)) {
-            return;
+        if (!isValidText(text)) return;
+
+        String[] noPunctuation = text.split("[\\s\\p{P}]+");
+
+        int indexWordMinLength = 0;
+        int indexWordMaxLength = 0;
+
+        for (int i = 1; i < noPunctuation.length; i++) {
+            if (noPunctuation[indexWordMaxLength].length() < noPunctuation[i].length()) {
+                indexWordMaxLength = i;
+            }
+            if (noPunctuation[indexWordMinLength].length() > noPunctuation[i].length()) {
+                indexWordMinLength = i;
+            }
         }
-
-        String[] words = text.split("[\\s.,!?;:'\"(){}\\[\\]<>-]+");
-
-        int indexWordMinLength = findMinLengthWord(words);
-        int indexWordMaxLength = findMaxLengthWord(words);
 
         if (indexWordMinLength > indexWordMaxLength) {
             int swapIndex = indexWordMinLength;
@@ -28,18 +35,18 @@ public class OutputText {
             indexWordMaxLength = swapIndex;
         }
 
-        String[] wordsWithPunctuation = text.split(" ");
+        String[] withPunctuation = text.split(" ");
 
-        for (int i = 0; i < wordsWithPunctuation.length; i++) {
-            if (wordsWithPunctuation[i].equals("-") && i < indexWordMinLength) {
+        for (int i = 0; i < withPunctuation.length; i++) {
+            if (withPunctuation[i].equals("-") && i < indexWordMinLength) {
                 indexWordMinLength++;
                 indexWordMaxLength++;
             }
             if (i >= indexWordMinLength && i <= indexWordMaxLength) {
-                wordsWithPunctuation[i] = wordsWithPunctuation[i].toUpperCase();
+                withPunctuation[i] = withPunctuation[i].toUpperCase();
             }
         }
-        printLetterByLetter(wordsWithPunctuation);
+        printLetters(withPunctuation);
         System.out.println();
     }
 
@@ -51,31 +58,7 @@ public class OutputText {
         return true;
     }
 
-    private static int findMaxLengthWord(String[] words) {
-        String maxLength = words[0];
-        int result = words[0].length();
-        for (int i = 1; i < words.length; i++) {
-            if (maxLength.length() < words[i].length()) {
-                maxLength = words[i];
-                result = i;
-            }
-        }
-        return result;
-    }
-
-    private static int findMinLengthWord(String[] words) {
-        String minLength = words[0];
-        int result = words[0].length();
-        for (int i = 1; i < words.length; i++) {
-            if (minLength.length() > words[i].length()) {
-                minLength = words[i];
-                result = i;
-            }
-        }
-        return result;
-    }
-
-    private static void printLetterByLetter(String[] text) throws InterruptedException {
+    private static void printLetters(String[] text) throws InterruptedException {
         for (String word : text) {
             String[] letter = word.split("");
             for (String l : letter) {

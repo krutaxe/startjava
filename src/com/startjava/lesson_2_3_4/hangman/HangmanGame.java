@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class HangmanGame {
 
-    private static final String[] WORDS = {"телефон", "дом", "кошка", "компьютер", "зонт", "дерево"};
-    private static final String[] HANGMAN_ARRAY = {
+    private static final String[] words = {"телефон", "дом", "кошка", "компьютер", "зонт", "дерево"};
+    private static final String[] gallows = {
             "____ \n",
             "   |   \n",
             "   |   \n",
@@ -15,7 +15,6 @@ public class HangmanGame {
             "  /|\\ \n",
             "  / \\ \n"
     };
-    private static final int MAX_TRIES = HANGMAN_ARRAY.length;
     private static int tries;
 
     public static void main(String[] args) {
@@ -31,7 +30,7 @@ public class HangmanGame {
 
         print(guessLetters);
         Scanner sc = new Scanner(System.in);
-        while (!isGuessesWord(guessLetters) && !((MAX_TRIES - tries) == 0)) {
+        while (!isGuessesWord(guessLetters) && !((gallows.length - tries) == 0)) {
             System.out.print("\nВведите букву: ");
             String letter = sc.nextLine();
 
@@ -40,13 +39,14 @@ public class HangmanGame {
                 continue;
             }
 
-            if (!isCyrillicLetter(letter)) {
-                System.out.println("Вы ввели не правильный символ!");
+            if (!letter.matches("[а-яА-Я]")) {
+                System.out.println("Пожалуйста, введите букву из кириллицы.(а-я, А-Я)");
                 continue;
             }
 
             if (isExistMissingLetters(missingLetters, letter) || isExistGuessLetter(guessLetters, letter)) {
                 System.out.println("Вы уже вводили букву: " + letter);
+                continue;
             }
 
             if (!isExistLetter(hiddenWordLetters, letter, guessLetters) &&
@@ -58,27 +58,30 @@ public class HangmanGame {
             System.out.print("Угадываемое слово ");
             print(guessLetters);
             System.out.println("Ошибочные буквы: " + missingLetters);
-            System.out.println("Оставшееся количество попыток " + (MAX_TRIES - tries));
-            hangmanPrint(tries);
-        }
+            System.out.println("Оставшееся количество попыток " + (gallows.length - tries));
 
-        if (MAX_TRIES == tries) {
-            System.out.println("Вы проиграли!!!");
-        } else {
-            System.out.println("Вы победили!!!");
-        }
+            if (isGuessesWord(guessLetters)) {
+                System.out.println("Вы победили!!!");
+                return;
+            }
 
+            drawGallows(tries);
+
+            if ((gallows.length - tries) == 0) {
+                System.out.println("Вы проиграли!!!");
+            }
+        }
     }
 
     private static String randomWord() {
-        return WORDS[(int) (Math.random() * WORDS.length)];
+        return words[(int) (Math.random() * words.length)];
     }
 
     private static boolean isExistLetter(String[] hiddenWordLetters, String letter, String[] guessLetters) {
         boolean exist = false;
         for (int i = 0; i < hiddenWordLetters.length; i++) {
             if (hiddenWordLetters[i].equalsIgnoreCase(letter)) {
-                if (tries > 0 && tries < MAX_TRIES && !isExistGuessLetter(guessLetters, letter)) {
+                if (tries > 0 && tries < gallows.length && !isExistGuessLetter(guessLetters, letter)) {
                     tries--;
                 }
                 exist = true;
@@ -95,11 +98,6 @@ public class HangmanGame {
             }
         }
         return true;
-    }
-
-    private static boolean isCyrillicLetter(String letter) {
-        char ch = letter.charAt(0);
-        return Character.UnicodeScript.of(ch) == UnicodeScript.CYRILLIC;
     }
 
     private static boolean isExistGuessLetter(String[] guessLetters, String letter) {
@@ -122,9 +120,9 @@ public class HangmanGame {
         System.out.println();
     }
 
-    private static void hangmanPrint(int index) {
+    private static void drawGallows(int index) {
         for (int i = 0; i < index; i++) {
-            System.out.print(HangmanGame.HANGMAN_ARRAY[i]);
+            System.out.print(gallows[i]);
         }
     }
 }
