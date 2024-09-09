@@ -1,6 +1,5 @@
 package com.startjava.lesson_2_3_4.hangman;
 
-import java.lang.Character.UnicodeScript;
 import java.util.Arrays;
 import java.util.Scanner;
 
