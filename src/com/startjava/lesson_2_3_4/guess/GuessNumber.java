@@ -43,12 +43,12 @@ public class GuessNumber {
     public void printEnteredNumbers() {
         int[] enteredNumbersPlayer1 = Arrays.copyOf(player1.getNumbers(), player1.getTries());
         int[] enteredNumbersPlayer2 = Arrays.copyOf(player2.getNumbers(), player2.getTries());
-        for (int i = 0; i < player1.getTries(); i++) {
-            System.out.print(enteredNumbersPlayer1[i] + " ");
+        for (int j : enteredNumbersPlayer1) {
+            System.out.print(j + " ");
         }
         System.out.println();
-        for (int i = 0; i < player2.getTries(); i++) {
-            System.out.print(enteredNumbersPlayer2[i] + " ");
+        for (int j : enteredNumbersPlayer2) {
+            System.out.print(j + " ");
         }
     }
 
