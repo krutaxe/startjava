@@ -40,21 +40,16 @@ public class GuessNumber {
         }
     }
 
-    public void printEnteredNumbers() {
-        int[] enteredNumbersPlayer1 = Arrays.copyOf(player1.getNumbers(), player1.getTries());
-        int[] enteredNumbersPlayer2 = Arrays.copyOf(player2.getNumbers(), player2.getTries());
-        for (int j : enteredNumbersPlayer1) {
-            System.out.print(j + " ");
-        }
-        System.out.println();
-        for (int j : enteredNumbersPlayer2) {
+    private void printEnteredNumbers(Player player) {
+        int[] enteredNumbersPlayer = Arrays.copyOf(player.getNumbers(), player.getTries());
+        for (int j : enteredNumbersPlayer) {
             System.out.print(j + " ");
         }
     }
 
     private void inputNumber(Player player, Scanner scanner) {
         System.out.print(player.getName() + " введите число ");
-        player.setNumber(scanner.nextInt());
+        player.getNumbers()[player.getTries()] = scanner.nextInt();
     }
 
     private boolean isGuessed(Player player, int hiddenNumber) {
