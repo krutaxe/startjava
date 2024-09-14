@@ -38,6 +38,8 @@ public class GuessNumber {
         }
         printEnteredNumbers(player1);
         printEnteredNumbers(player2);
+        player1.clearNumbers();
+        player2.clearNumbers();
     }
 
     private void inputNumber(Player player, Scanner scanner) {

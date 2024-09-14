@@ -32,4 +32,8 @@ public class Player {
     public void addNumber(int number, int tries) {
         numbers[tries] = number;
     }
+
+    public void clearNumbers() {
+        Arrays.fill(numbers, 0, getNumbers().length - 1, 0);
+    }
 }
