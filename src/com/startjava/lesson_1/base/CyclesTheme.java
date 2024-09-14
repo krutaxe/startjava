@@ -28,7 +28,7 @@ public class CyclesTheme {
             max = num2;
         }
         if (num3 > max) {
-             max = num3;
+            max = num3;
         }
         if (num2 < min) {
             min = num2;

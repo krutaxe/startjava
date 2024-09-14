@@ -3,7 +3,6 @@ package com.startjava.lesson_2_3_4.array;
 import java.util.Random;
 
 public class Remover {
-
     public static void main(String[] args) {
         removeExceedingValues(-1);
         removeExceedingValues(15);

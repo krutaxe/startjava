@@ -1,12 +1,16 @@
 package com.startjava.lesson_2_3_4.guess;
 
+import java.util.Arrays;
+
 public class Player {
     private String name;
-    private int[] numbers = new  int[10];
+    private int[] numbers;
     private int tries;
 
     public Player(String name) {
         this.name = name;
+        this.numbers = new int[10];
+        this.tries = 0;
     }
 
     public String getName() {
@@ -14,7 +18,7 @@ public class Player {
     }
 
     public int[] getNumbers() {
-        return numbers;
+        return Arrays.copyOf(numbers, tries + 1);
     }
 
     public int getTries() {
@@ -23,5 +27,9 @@ public class Player {
 
     public void setTries(int tries) {
         this.tries = tries;
+    }
+
+    public void addNumber(int number, int tries) {
+        numbers[tries] = number;
     }
 }

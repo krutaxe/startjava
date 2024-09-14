@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Filler {
-
     public static void main(String[] args) {
         fillUniqueNumbers(-10, 20, 23);
         fillUniqueNumbers(-30, 10, 10);
@@ -37,7 +36,8 @@ public class Filler {
     private static boolean isValidInput(int start, int end, int numbersPerLine) {
         boolean isValid = true;
         if (numbersPerLine < 1) {
-            System.out.println("Ошибка: количество чисел в строке не может быть меньше 1 (" + numbersPerLine + ")");
+            System.out.println("Ошибка: количество чисел в строке не может быть меньше 1 (" +
+                    numbersPerLine + ")");
             isValid = false;
         }
 

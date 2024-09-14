@@ -1,7 +1,6 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class OutputCharacters {
-
     public static void main(String[] args) {
         printTriangle('0', '9', true);
         printTriangle('/', '!', false);
@@ -30,7 +29,8 @@ public class OutputCharacters {
 
     private static void appendRow(StringBuilder triangle, boolean asc, int value, int start, int maxRows) {
         int spaces = asc ? maxRows - (value - start - 1) : value - start;
-        int repeats = asc ? Math.max(0, ((value - start) * 2 - 1)) : Math.max(0, ((maxRows + start - value) * 2 - 1));
+        int repeats = asc ? Math.max(0, ((value - start) * 2 - 1)) :
+                Math.max(0, ((maxRows + start - value) * 2 - 1));
         value = asc ? (value - 1) : value;
 
         triangle.append(" ".repeat(Math.max(0, spaces)));

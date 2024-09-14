@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class HangmanGame {
-
     private static final String[] words = {"телефон", "дом", "кошка", "компьютер", "зонт", "дерево"};
     private static final String[] gallows = {
             "____ \n",

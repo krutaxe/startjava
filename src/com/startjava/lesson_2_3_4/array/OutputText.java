@@ -1,12 +1,11 @@
 package com.startjava.lesson_2_3_4.array;
 
 public class OutputText {
-
     public static void main(String[] args) throws InterruptedException {
-        typewriterEffect("Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n"
-                + "- James Gosling");
-        typewriterEffect("Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n"
-                + "- Robert Martin");
+        typewriterEffect("Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n" +
+                "- James Gosling");
+        typewriterEffect("Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его.\n" +
+                "- Robert Martin");
 
         typewriterEffect(null);
         typewriterEffect("");
