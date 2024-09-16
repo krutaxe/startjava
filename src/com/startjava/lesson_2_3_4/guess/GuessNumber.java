@@ -14,7 +14,7 @@ public class GuessNumber {
     public void start(Scanner scanner) {
         System.out.println("Игра началась! У каждого игрока по 10 попыток.");
         System.out.println("Компьютер загадал число!!!");
-        int hiddenNumber = (int) (Math.random() * 100) + 1;
+        int hiddenNumber = (int) (Math.random() * 1) + 1;
         player1.setTries(0);
         player2.setTries(0);
 
@@ -44,12 +44,12 @@ public class GuessNumber {
 
     private void inputNumber(Player player, Scanner scanner) {
         System.out.print(player.getName() + " введите число ");
-        player.addNumber(scanner.nextInt(), player.getTries());
+        player.addNumber(scanner.nextInt());
+        player.setTries(player.getTries() + 1);
     }
 
     private boolean isGuessed(Player player, int hiddenNumber) {
-        int inputNumber = player.getNumbers()[player.getTries()];
-        player.setTries(player.getTries() + 1);
+        int inputNumber = player.getLastNumber();
         if (hiddenNumber == inputNumber) {
             System.out.println(player.getName() + " угадал число " + hiddenNumber +
                     " c " + player.getTries() + "-й попытки");
@@ -64,18 +64,18 @@ public class GuessNumber {
         return false;
     }
 
-    private void printEnteredNumbers(Player player) {
-        for (int i = 0; i < player.getNumbers().length - 1; i++) {
-            System.out.print(player.getNumbers()[i] + " ");
-        }
-        System.out.println();
-    }
-
     private boolean hasTries(Player player) {
         if (player.getTries() >= 10) {
             System.out.println("У " + player.getName() + " закончились попытки!");
             return false;
         }
         return true;
+    }
+
+    private void printEnteredNumbers(Player player) {
+        for (int num : player.getNumbers()) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
     }
 }

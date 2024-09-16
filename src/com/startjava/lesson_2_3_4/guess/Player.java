@@ -10,15 +10,10 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.numbers = new int[10];
-        this.tries = 0;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int[] getNumbers() {
-        return Arrays.copyOf(numbers, tries + 1);
     }
 
     public int getTries() {
@@ -29,11 +24,19 @@ public class Player {
         this.tries = tries;
     }
 
-    public void addNumber(int number, int tries) {
+    public int[] getNumbers() {
+        return Arrays.copyOf(numbers, tries);
+    }
+
+    public void addNumber(int number) {
         numbers[tries] = number;
     }
 
+    public int getLastNumber() {
+        return getNumbers()[getTries() - 1];
+    }
+
     public void clearNumbers() {
-        Arrays.fill(numbers, 0, getNumbers().length - 1, 0);
+        Arrays.fill(numbers, 0, tries, 0);
     }
 }
