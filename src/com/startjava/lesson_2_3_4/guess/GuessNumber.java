@@ -7,8 +7,8 @@ public class GuessNumber {
     private final Player player2;
 
     public GuessNumber(String namePlayer1, String namePlayer2) {
-        this.player1 = new Player(namePlayer1);
-        this.player2 = new Player(namePlayer2);
+        player1 = new Player(namePlayer1);
+        player2 = new Player(namePlayer2);
     }
 
     public void start(Scanner scanner) {
@@ -73,8 +73,8 @@ public class GuessNumber {
     }
 
     private void printEnteredNumbers(Player player) {
-        for (int num : player.getNumbers()) {
-            System.out.print(num + " ");
+        for (int numbers : player.getNumbers()) {
+            System.out.print(numbers + " ");
         }
         System.out.println();
     }

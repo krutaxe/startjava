@@ -33,7 +33,7 @@ public class Player {
     }
 
     public int getLastNumber() {
-        return getNumbers()[getTries() - 1];
+        return numbers[tries - 1];
     }
 
     public void clearNumbers() {
