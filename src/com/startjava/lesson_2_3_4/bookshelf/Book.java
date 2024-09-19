@@ -4,12 +4,12 @@ import java.util.StringJoiner;
 
 public class Book {
     private String author;
-    private String bookName;
+    private String title;
     private int year;
 
-    public Book(String author, String bookName, int year) {
+    public Book(String author, String title, int year) {
         this.author = author;
-        this.bookName = bookName;
+        this.title = title;
         this.year = year;
     }
 
@@ -21,12 +21,12 @@ public class Book {
         this.author = author;
     }
 
-    public String getBookName() {
-        return bookName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getYear() {
@@ -37,11 +37,16 @@ public class Book {
         this.year = year;
     }
 
+    public void printInfo() {
+        System.out.printf("|%-40s|%n", author + ", " + title + ", " + year);
+        System.out.println("|----------------------------------------|");
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Book.class.getSimpleName() + "[", "]")
                 .add("author='" + author + "'")
-                .add("bookName='" + bookName + "'")
+                .add("title='" + title + "'")
                 .add("year=" + year)
                 .toString();
     }

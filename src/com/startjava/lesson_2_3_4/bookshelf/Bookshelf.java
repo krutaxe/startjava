@@ -6,15 +6,13 @@ import java.util.Scanner;
 public class Bookshelf {
     private int numberOfBooks;
     private Book[] books = new Book[10];
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public Bookshelf() {
-        books[0] = new Book("Пушкин", "Сказка", 1990);
-        books[1] = new Book("Толстой", "Война и мир", 1857);
-        books[2] = new Book("Гоголь", "Мертвый души", 1925);
-        books[3] = new Book("Лермонтов", "Рассказ", 1890);
-        books[4] = new Book("Носов", "Стих", 1990);
-        numberOfBooks = 5;
+        books[0] = new Book("Иван Тургенев", "Записки охотника", 1845);
+        books[1] = new Book("Лев Толстой", "Война и мир", 1869);
+        books[2] = new Book("Николай Носов", "Живая шляпа", 1964);
+        numberOfBooks = 3;
     }
 
     public int getNumberOfBooks() {
@@ -34,17 +32,13 @@ public class Bookshelf {
     }
 
     public void showAllBooks() {
-        if (books == null) {
-            System.out.println("В шкафу нет книг");
-            return;
-        }
+        numberOfPlaces();
         for (Book book : books) {
             if (book == null) {
                 break;
             }
-            System.out.println(book);
+            book.printInfo();
         }
-        numberOfPlaces();
     }
 
     public void addBook() {
@@ -70,7 +64,7 @@ public class Bookshelf {
         String nameBook = scanner.nextLine();
         for (Book book : books) {
             if (book == null) return null;
-            if (nameBook.equals(book.getBookName())) {
+            if (nameBook.equals(book.getTitle())) {
                 return book;
             }
         }
@@ -80,11 +74,12 @@ public class Bookshelf {
 
     public void deletedBook() {
         System.out.println("Введите название книги: ");
-        String nameBook = scanner.nextLine();
+        String title = scanner.nextLine();
         for (int i = 0; i < numberOfBooks; i++) {
-            if (nameBook.equals(books[i].getBookName())) {
+            if (title.equals(books[i].getTitle())) {
                 books[i] = null;
                 numberOfBooks--;
+                System.out.println("Книга с названием: " + title + " - успешно удалена!");
             }
         }
         shiftOfBooks();
@@ -92,8 +87,8 @@ public class Bookshelf {
     }
 
     public void numberOfPlaces() {
-        System.out.println("В шкафу книг - " + numberOfBooks + ", свободных полок - " +
-                (books.length - numberOfBooks));
+        System.out.println("В шкафу книг - " + numberOfBooks + ", свободно полок - " +
+                (books.length - numberOfBooks) + "\n");
     }
 
     public void shiftOfBooks() {
@@ -113,5 +108,14 @@ public class Bookshelf {
     public void clear() {
         Arrays.fill(books, null);
         numberOfBooks = 0;
+    }
+
+    public void checkShelf() {
+        for (Book book : books) {
+            if (book != null) {
+                return;
+            }
+        }
+        System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
     }
 }
