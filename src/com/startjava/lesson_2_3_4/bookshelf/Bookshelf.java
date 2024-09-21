@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Bookshelf {
     private int numberOfBooks;
-    private Book[] books = new Book[10];
+    private final Book[] books = new Book[10];
     private final Scanner scanner = new Scanner(System.in);
 
     public Bookshelf() {
@@ -13,22 +13,6 @@ public class Bookshelf {
         books[1] = new Book("Лев Толстой", "Война и мир", 1869);
         books[2] = new Book("Николай Носов", "Живая шляпа", 1964);
         numberOfBooks = 3;
-    }
-
-    public int getNumberOfBooks() {
-        return numberOfBooks;
-    }
-
-    public void setNumberOfBooks(int numberOfBooks) {
-        this.numberOfBooks = numberOfBooks;
-    }
-
-    public Book[] getBooks() {
-        return books;
-    }
-
-    public void setBooks(Book[] books) {
-        this.books = books;
     }
 
     public void showAllBooks() {
@@ -51,47 +35,68 @@ public class Bookshelf {
         System.out.print("Введите название книги: ");
         String nameBook = scanner.nextLine();
         System.out.print("Введите год издания: ");
-        int year = scanner.nextInt();
-        scanner.nextLine();
+        int year;
+        while (!scanner.hasNextInt()) {
+            System.out.println("Ошибка: введено не число. Попробуйте снова.");
+            System.out.print("Введите год издания: ");
+            scanner.next();
+        }
+        year = scanner.nextInt();
         Book book = new Book(nameAuthor, nameBook, year);
         books[numberOfBooks] = book;
         numberOfBooks++;
         numberOfPlaces();
     }
 
-    public Book findBook() {
+    public int findBook() {
         System.out.println("Введите название книги: ");
         String nameBook = scanner.nextLine();
-        for (Book book : books) {
-            if (book == null) return null;
-            if (nameBook.equals(book.getTitle())) {
-                return book;
+        for (int i = 0; i < numberOfBooks; i++) {
+            if (books[i] == null) {
+                return -1;
+            }
+            if (nameBook.equals(books[i].getTitle())) {
+                books[i].printInfo();
+                return i;
             }
         }
-        numberOfPlaces();
-        return null;
+        System.out.println("Книга не найдена!");
+        return -1;
     }
 
     public void deletedBook() {
-        System.out.println("Введите название книги: ");
-        String title = scanner.nextLine();
-        for (int i = 0; i < numberOfBooks; i++) {
-            if (title.equals(books[i].getTitle())) {
-                books[i] = null;
-                numberOfBooks--;
-                System.out.println("Книга с названием: " + title + " - успешно удалена!");
-            }
+        int i = findBook();
+        if (i == -1) {
+            return;
         }
+        books[i] = null;
+        numberOfBooks--;
+        System.out.println("Книга успешно удалена!");
         shiftOfBooks();
         numberOfPlaces();
     }
 
-    public void numberOfPlaces() {
+    public void clear() {
+        Arrays.fill(books, null);
+        numberOfBooks = 0;
+        System.out.println("Все книги удалены!");
+    }
+
+    private void numberOfPlaces() {
         System.out.println("В шкафу книг - " + numberOfBooks + ", свободно полок - " +
                 (books.length - numberOfBooks) + "\n");
     }
 
-    public void shiftOfBooks() {
+    public void checkShelf() {
+        for (Book book : books) {
+            if (book != null) {
+                return;
+            }
+        }
+        System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
+    }
+
+    private void shiftOfBooks() {
         int nonNullIndex = 0;
         for (int i = 0; i < books.length; i++) {
             if (books[i] != null) {
@@ -103,19 +108,5 @@ public class Bookshelf {
         for (int i = nonNullIndex; i < books.length; i++) {
             books[i] = null;
         }
-    }
-
-    public void clear() {
-        Arrays.fill(books, null);
-        numberOfBooks = 0;
-    }
-
-    public void checkShelf() {
-        for (Book book : books) {
-            if (book != null) {
-                return;
-            }
-        }
-        System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
     }
 }
