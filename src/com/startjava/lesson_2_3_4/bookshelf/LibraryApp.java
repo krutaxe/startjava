@@ -11,25 +11,27 @@ public class LibraryApp {
             5. Удалить все книги
             6. Выйти
             """;
-    private static final Scanner SCANNER = new Scanner(System.in);
-    private static final Bookshelf BOOKSHELF = new Bookshelf();
+    private static Scanner scanner = new Scanner(System.in);
+    private static Bookshelf bookshelf = new Bookshelf();
 
     public static void main(String[] args) {
+        start();
+    }
+
+    private static void start() {
         while (true) {
             System.out.println("Выберете пункт меню: \n" + TEXT_MENU);
-            checkShelf();
-
             int select;
-            if (SCANNER.hasNextInt()) {
-                select = SCANNER.nextInt();
+            if (scanner.hasNextInt()) {
+                select = scanner.nextInt();
             } else {
                 System.out.println("Ошибка: введено не число. Попробуйте снова.");
-                SCANNER.next();
+                scanner.next();
                 continue;
             }
 
             switch (select) {
-                case 1 -> showAllBooks();
+                case 1 -> getAllBooks();
                 case 2 -> addBook();
                 case 3 -> findBook();
                 case 4 -> deletedBook();
@@ -40,54 +42,49 @@ public class LibraryApp {
                 default -> System.out.println("Ошибка: введите номер из списка: \n" + TEXT_MENU);
             }
             System.out.println("Для продолжения работы нажмите клавишу <Enter>");
-            SCANNER.nextLine();
-            SCANNER.nextLine();
+            scanner.nextLine();
+            scanner.nextLine();
         }
     }
 
-    private static void checkShelf() {
-        for (Book book : Bookshelf.BOOKS) {
-            if (book != null) {
-                return;
-            }
-        }
-        System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
-    }
-
-    private static void showAllBooks() {
-        Book[] books = BOOKSHELF.showAllBooks();
-        if (books.length == 0) {
+    private static void getAllBooks() {
+        if (bookshelf.books[0] == null) {
             System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
             return;
         }
-        for (Book book : BOOKSHELF.showAllBooks()) {
-            System.out.println(book);
+        for (Book book : bookshelf.getAll()) {
+            System.out.printf("|%-40s|%n%s", book.toString() + "г.",
+                    "|----------------------------------------|\n");
         }
     }
 
     private static void addBook() {
-        SCANNER.nextLine();
+        if (bookshelf.getNumberOfBooks() >= 10) {
+            System.out.println("Свободных мест в шкафу больше нет, добавить книгу невозможно");
+            return;
+        }
+        scanner.nextLine();
         System.out.print("Введите имя автора: ");
-        String nameAuthor = SCANNER.nextLine();
+        String nameAuthor = scanner.nextLine();
         System.out.print("Введите название книги: ");
-        String title = SCANNER.nextLine();
+        String title = scanner.nextLine();
         System.out.print("Введите год издания: ");
         int publicationYear;
-        while (!SCANNER.hasNextInt()) {
+        while (!scanner.hasNextInt()) {
             System.out.println("Ошибка: введено не число. Попробуйте снова.");
             System.out.print("Введите год издания: ");
-            SCANNER.next();
+            scanner.next();
         }
-        publicationYear = SCANNER.nextInt();
-        BOOKSHELF.addBook(nameAuthor, title, publicationYear);
+        publicationYear = scanner.nextInt();
+        bookshelf.add(new Book(nameAuthor, title, publicationYear));
         numberOfPlaces();
     }
 
     private static int searchIndexBook() {
-        SCANNER.nextLine();
+        scanner.nextLine();
         System.out.println("Введите название книги: ");
-        String title = SCANNER.nextLine();
-        int indexBook = BOOKSHELF.findBook(title);
+        String title = scanner.nextLine();
+        int indexBook = bookshelf.find(title);
         if (indexBook == -1) {
             System.out.println("Книга не найдена!");
         }
@@ -97,27 +94,26 @@ public class LibraryApp {
     private static void findBook() {
         int indexBook = searchIndexBook();
         if (indexBook != -1) {
-            System.out.println(Bookshelf.BOOKS[indexBook]);
+            System.out.println(bookshelf.books[indexBook]);
         }
     }
 
     private static void deletedBook() {
         int indexBook = searchIndexBook();
         if (indexBook != -1) {
-            BOOKSHELF.deletedBook(indexBook);
+            bookshelf.deleted(indexBook);
             System.out.println("Книга успешно удалена!");
             numberOfPlaces();
         }
     }
 
     private static void clear() {
-        BOOKSHELF.clear();
+        bookshelf.clear();
         System.out.println("Все книги удалены!");
-        numberOfPlaces();
     }
 
     private static void numberOfPlaces() {
-        System.out.println("В шкафу книг - " + BOOKSHELF.getNumberOfBooks() + ", свободно полок - " +
-                (Bookshelf.BOOKS.length - BOOKSHELF.getNumberOfBooks()) + "\n");
+        System.out.println("В шкафу книг - " + bookshelf.getNumberOfBooks() + ", свободно полок - " +
+                (bookshelf.books.length - bookshelf.getNumberOfBooks()) + "\n");
     }
 }
