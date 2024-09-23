@@ -17,7 +17,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.format("|%-40s|%n%s", author + ", " + title + ", " + publicationYear + "г.",
-                "|----------------------------------------|");
+        return author + ", " + title + ", " + publicationYear;
     }
 }
