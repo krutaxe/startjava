@@ -3,7 +3,7 @@ package com.startjava.lesson_2_3_4.bookshelf;
 import java.util.Arrays;
 
 public class Bookshelf {
-    private static final int BOOKSHELF_SIZE = 10;
+    public static final int BOOKSHELF_SIZE = 10;
     private int numberOfBooks;
     private final Book[] books = new Book[BOOKSHELF_SIZE];
 
@@ -14,16 +14,8 @@ public class Bookshelf {
         numberOfBooks = 3;
     }
 
-    public static int getBookshelfSize() {
-        return BOOKSHELF_SIZE;
-    }
-
     public int getNumberOfBooks() {
         return numberOfBooks;
-    }
-
-    public Book[] getBooks() {
-        return books;
     }
 
     public Book[] getAll() {
@@ -43,7 +35,7 @@ public class Bookshelf {
         return -1;
     }
 
-    public void deleted(int index) {
+    public void delete(int index) {
         int numberElementToShift = numberOfBooks - index - 1;
         if (numberElementToShift > 0) {
             System.arraycopy(books, index + 1, books, index, numberElementToShift);
@@ -55,5 +47,15 @@ public class Bookshelf {
     public void clear() {
         Arrays.fill(books, 0, numberOfBooks, null);
         numberOfBooks = 0;
+    }
+
+    public int maxLengthName() {
+        int maxLength = 0;
+        for (Book book : getAll()) {
+            if (maxLength < book.toString().length()) {
+                maxLength = book.toString().length();
+            }
+        }
+        return maxLength;
     }
 }

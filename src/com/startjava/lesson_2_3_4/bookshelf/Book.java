@@ -15,8 +15,12 @@ public class Book {
         return title;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
     @Override
     public String toString() {
-        return author + ", " + title + ", " + publicationYear;
+        return author + ", " + title + ", " + publicationYear + "г.";
     }
 }
