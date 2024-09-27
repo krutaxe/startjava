@@ -19,20 +19,34 @@ public class LibraryApp {
 
     private static void start() {
         while (true) {
-            getAllBooks();
-            switch (selectMenuItem()) {
-                case 1 -> addBook();
-                case 2 -> findBook();
-                case 3 -> deleteBook();
-                case 4 -> clear();
-                case 5 -> {
-                    return;
+            printBookshelf();
+            MenuItem selectedItem = MenuItem.getName(selectMenuItem());
+            if (selectedItem != MenuItem.UNKNOWN) {
+                switch (selectedItem) {
+                    case ADD -> addBook();
+                    case FIND -> findBook();
+                    case DELETE -> deleteBook();
+                    case CLEAR -> clear();
+                    case EXIT -> {
+                        return;
+                    }
                 }
-                default -> System.out.println("Ошибка: введите номер из списка: \n" + TEXT_MENU);
+            } else {
+                System.out.println("Ошибка: введите номер из списка: \n" + TEXT_MENU);
             }
             System.out.println("Для продолжения работы нажмите клавишу <Enter>");
-            scanner.nextLine();
-            scanner.nextLine();
+            inputEnter();
+        }
+    }
+
+    private static void printBookshelf() {
+        if (bookshelf.getNumberOfBooks() == 0) {
+            System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
+            return;
+        }
+        numberOfPlaces();
+        for (Book book : bookshelf.getAll()) {
+            printBook(book);
         }
     }
 
@@ -47,19 +61,8 @@ public class LibraryApp {
         }
     }
 
-    private static void getAllBooks() {
-        numberOfPlaces();
-        if (bookshelf.getNumberOfBooks() == 0) {
-            System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
-            return;
-        }
-        for (Book book : bookshelf.getAll()) {
-            printBook(book);
-        }
-    }
-
     private static void addBook() {
-        if (bookshelf.getNumberOfBooks() >= Bookshelf.getBookshelfSize()) {
+        if (bookshelf.getNumberOfBooks() >= Bookshelf.BOOKSHELF_SIZE) {
             System.out.println("Свободных мест в шкафу больше нет, добавить книгу невозможно");
             return;
         }
@@ -69,37 +72,35 @@ public class LibraryApp {
         System.out.print("Введите название книги: ");
         String title = scanner.nextLine();
         System.out.print("Введите год издания: ");
-        int publicationYear;
+
         while (!scanner.hasNextInt()) {
             System.out.println("Ошибка: введено не число. Попробуйте снова.");
             System.out.print("Введите год издания: ");
             scanner.next();
         }
-        publicationYear = scanner.nextInt();
+        int publicationYear = scanner.nextInt();
         bookshelf.add(new Book(nameAuthor, title, publicationYear));
+        Bookshelf.setMaxLengthName(bookshelf.maxLengthName());
+        scanner.nextLine();
     }
 
     private static void findBook() {
-        int indexBook = searchIndexBook();
+        int indexBook = findPosition();
         if (indexBook != -1) {
-            printBook(bookshelf.getBooks()[indexBook]);
+            printBook(bookshelf.getBookByIndex(indexBook));
         }
-    }
-
-    private static void printBook(Book book) {
-        System.out.printf("|%-40s|%n%s%n", book + "г.",
-                "|----------------------------------------|");
     }
 
     private static void deleteBook() {
-        int indexBook = searchIndexBook();
+        int indexBook = findPosition();
         if (indexBook != -1) {
-            bookshelf.deleted(indexBook);
+            bookshelf.delete(indexBook);
             System.out.println("Книга успешно удалена!");
         }
+        Bookshelf.setMaxLengthName(bookshelf.maxLengthName());
     }
 
-    private static int searchIndexBook() {
+    private static int findPosition() {
         scanner.nextLine();
         System.out.println("Введите название книги: ");
         String title = scanner.nextLine();
@@ -113,10 +114,24 @@ public class LibraryApp {
     private static void clear() {
         bookshelf.clear();
         System.out.println("Все книги удалены!");
+        scanner.nextLine();
+    }
+
+    private static void printBook(Book book) {
+        String shelf = "-".repeat(Bookshelf.getMaxLengthName());
+        System.out.printf("|%-" + Bookshelf.getMaxLengthName() + "s|%n%s%n", book, "|" + shelf + "|");
     }
 
     private static void numberOfPlaces() {
         System.out.println("В шкафу книг - " + bookshelf.getNumberOfBooks() + ", свободно полок - " +
-                (bookshelf.getBooks().length - bookshelf.getNumberOfBooks()) + "\n");
+                (Bookshelf.BOOKSHELF_SIZE - bookshelf.getNumberOfBooks()) + "\n");
+    }
+
+    private static void inputEnter() {
+        String input = scanner.nextLine();
+        while (!input.isEmpty()) {
+            System.out.println("Вы ввели " + input + ". Пожалуйста, нажмите <Enter> для продолжения.");
+            input = scanner.nextLine();
+        }
     }
 }
