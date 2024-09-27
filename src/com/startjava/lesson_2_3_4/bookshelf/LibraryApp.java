@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 public class LibraryApp {
     private static final String TEXT_MENU = """
-            1. Показать все книги
-            2. Добавить книгу
-            3. Найти книгу
-            4. Удалить книгу
-            5. Удалить все книги
-            6. Выйти
+            1. Добавить книгу
+            2. Найти книгу
+            3. Удалить книгу
+            4. Удалить все книги
+            5. Выйти
             """;
     private static Scanner scanner = new Scanner(System.in);
     private static Bookshelf bookshelf = new Bookshelf();
@@ -20,23 +19,13 @@ public class LibraryApp {
 
     private static void start() {
         while (true) {
-            System.out.println("Выберете пункт меню: \n" + TEXT_MENU);
-            int select;
-            if (scanner.hasNextInt()) {
-                select = scanner.nextInt();
-            } else {
-                System.out.println("Ошибка: введено не число. Попробуйте снова.");
-                scanner.next();
-                continue;
-            }
-
-            switch (select) {
-                case 1 -> getAllBooks();
-                case 2 -> addBook();
-                case 3 -> findBook();
-                case 4 -> deletedBook();
-                case 5 -> clear();
-                case 6 -> {
+            getAllBooks();
+            switch (selectMenuItem()) {
+                case 1 -> addBook();
+                case 2 -> findBook();
+                case 3 -> deleteBook();
+                case 4 -> clear();
+                case 5 -> {
                     return;
                 }
                 default -> System.out.println("Ошибка: введите номер из списка: \n" + TEXT_MENU);
@@ -47,19 +36,30 @@ public class LibraryApp {
         }
     }
 
+    private static int selectMenuItem() {
+        while (true) {
+            System.out.println("\nВыберете пункт меню: \n" + TEXT_MENU);
+            if (scanner.hasNextInt()) {
+                return scanner.nextInt();
+            }
+            System.out.println("Ошибка: введено не число. Попробуйте снова.");
+            scanner.next();
+        }
+    }
+
     private static void getAllBooks() {
-        if (bookshelf.books[0] == null) {
+        numberOfPlaces();
+        if (bookshelf.getNumberOfBooks() == 0) {
             System.out.println("Шкаф пуст. Вы можете добавить в него первую книгу");
             return;
         }
         for (Book book : bookshelf.getAll()) {
-            System.out.printf("|%-40s|%n%s", book.toString() + "г.",
-                    "|----------------------------------------|\n");
+            printBook(book);
         }
     }
 
     private static void addBook() {
-        if (bookshelf.getNumberOfBooks() >= 10) {
+        if (bookshelf.getNumberOfBooks() >= Bookshelf.getBookshelfSize()) {
             System.out.println("Свободных мест в шкафу больше нет, добавить книгу невозможно");
             return;
         }
@@ -77,7 +77,26 @@ public class LibraryApp {
         }
         publicationYear = scanner.nextInt();
         bookshelf.add(new Book(nameAuthor, title, publicationYear));
-        numberOfPlaces();
+    }
+
+    private static void findBook() {
+        int indexBook = searchIndexBook();
+        if (indexBook != -1) {
+            printBook(bookshelf.getBooks()[indexBook]);
+        }
+    }
+
+    private static void printBook(Book book) {
+        System.out.printf("|%-40s|%n%s%n", book + "г.",
+                "|----------------------------------------|");
+    }
+
+    private static void deleteBook() {
+        int indexBook = searchIndexBook();
+        if (indexBook != -1) {
+            bookshelf.deleted(indexBook);
+            System.out.println("Книга успешно удалена!");
+        }
     }
 
     private static int searchIndexBook() {
@@ -91,22 +110,6 @@ public class LibraryApp {
         return indexBook;
     }
 
-    private static void findBook() {
-        int indexBook = searchIndexBook();
-        if (indexBook != -1) {
-            System.out.println(bookshelf.books[indexBook]);
-        }
-    }
-
-    private static void deletedBook() {
-        int indexBook = searchIndexBook();
-        if (indexBook != -1) {
-            bookshelf.deleted(indexBook);
-            System.out.println("Книга успешно удалена!");
-            numberOfPlaces();
-        }
-    }
-
     private static void clear() {
         bookshelf.clear();
         System.out.println("Все книги удалены!");
@@ -114,6 +117,6 @@ public class LibraryApp {
 
     private static void numberOfPlaces() {
         System.out.println("В шкафу книг - " + bookshelf.getNumberOfBooks() + ", свободно полок - " +
-                (bookshelf.books.length - bookshelf.getNumberOfBooks()) + "\n");
+                (bookshelf.getBooks().length - bookshelf.getNumberOfBooks()) + "\n");
     }
 }
