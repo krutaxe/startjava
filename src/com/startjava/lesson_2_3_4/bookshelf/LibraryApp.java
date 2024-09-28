@@ -80,7 +80,7 @@ public class LibraryApp {
         }
         int publicationYear = scanner.nextInt();
         bookshelf.add(new Book(nameAuthor, title, publicationYear));
-        Bookshelf.setMaxLengthName(bookshelf.maxLengthName());
+        bookshelf.updateLengthShelves();
         scanner.nextLine();
     }
 
@@ -97,7 +97,7 @@ public class LibraryApp {
             bookshelf.delete(indexBook);
             System.out.println("Книга успешно удалена!");
         }
-        Bookshelf.setMaxLengthName(bookshelf.maxLengthName());
+        bookshelf.updateLengthShelves();
     }
 
     private static int findPosition() {
@@ -118,8 +118,8 @@ public class LibraryApp {
     }
 
     private static void printBook(Book book) {
-        String shelf = "-".repeat(Bookshelf.getMaxLengthName());
-        System.out.printf("|%-" + Bookshelf.getMaxLengthName() + "s|%n%s%n", book, "|" + shelf + "|");
+        String shelf = "-".repeat(Bookshelf.getLengthShelves());
+        System.out.printf("|%-" + Bookshelf.getLengthShelves() + "s|%n%s%n", book, "|" + shelf + "|");
     }
 
     private static void numberOfPlaces() {
