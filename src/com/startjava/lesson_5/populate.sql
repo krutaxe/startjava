@@ -1,5 +1,5 @@
-insert into robots_and_jaegers (model_name, mark, height, weight, status, origin, launch, kaiju_kill)
-VALUES ('Gipsy Danger', 'Mark-3', '79', '1.980', 'Destroyed', 'USA', '2017-07-10', '5'),
+insert into jaegers (model_name, mark, height, weight, status, origin, launch, kaiju_kill)
+values ('Gipsy Danger', 'Mark-3', '79', '1.980', 'Destroyed', 'USA', '2017-07-10', '5'),
        ('Striker Eureka', 'Mark-5', '250', '41.792', 'Destroyed', 'Australia', '2019-11-2', '12'),
        ('Cherno Alpha', 'Mark-1', '280', '2.412', 'Destroyed', 'Russia', '2015-01-01', '20'),
        ('Crimson Typhoon', 'Mark-4', '250', '1.722', 'Destroyed', 'China', '2018-08-22', '7'),

@@ -1,9 +1,8 @@
-\c startjava
+\c robots
 
-drop table robots_and_jaegers;
+drop table if exists jaegers;
 
-create table robots_and_jaegers
-(
+create table jaegers (
     id         serial primary key,
     model_name text,
     mark       text,
@@ -16,6 +15,4 @@ create table robots_and_jaegers
 );
 
 \i populate.sql
-
 \i queries.sql
-
